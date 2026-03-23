@@ -1,0 +1,69 @@
+sequenceDiagram
+    participant CF as Contact Form
+    participant API as Express Server
+    participant MW as Middleware
+    participant CTR as Controller
+    participant DB as MongoDB
+    participant ACT as Activity Logger
+    participant DASH as Admin Dashboard
+
+    Note over CF,DASH: PUBLIC ROUTE - Contact Form Submission
+    CF->>API: POST /api/clients/contact
+    API->>MW: Validate Request (JOI)
+    MW->>CTR: clientController.submitContact()
+    CTR->>DB: Create Client Document
+    DB-->>CTR: Client Created
+    CTR->>ACT: Log Activity (New Client)
+    ACT->>DB: Save Activity
+    DB-->>ACT: Activity Saved
+    CTR-->>CF: 201 Success Response
+    
+    Note over CF,DASH: PROTECTED ROUTE - Admin Login
+    DASH->>API: POST /api/auth/login {email, password}
+    API->>MW: Validate Credentials (JOI)
+    MW->>CTR: authController.login()
+    CTR->>DB: Find Admin + Verify Password
+    DB-->>CTR: Admin Found
+    CTR->>CTR: Generate JWT Token
+    CTR-->>DASH: 200 {token, admin}
+    DASH->>DASH: Store Token in Memory/Context
+
+    Note over CF,DASH: PROTECTED ROUTE - Fetch Dashboard Data
+    DASH->>API: GET /api/dashboard/overview<br/>Header: Authorization Bearer {token}
+    API->>MW: Auth Middleware (Verify JWT)
+    MW->>MW: Decode Token & Find Admin
+    MW->>CTR: dashboardController.getOverview()
+    CTR->>DB: Aggregate Statistics
+    DB-->>CTR: Stats Data
+    CTR->>DB: Fetch Recent Clients
+    DB-->>CTR: Recent Clients
+    CTR->>DB: Fetch Recent Activities
+    DB-->>CTR: Recent Activities
+    CTR-->>DASH: 200 {stats, clients, activities}
+
+    Note over CF,DASH: PROTECTED ROUTE - Create Project
+    DASH->>API: POST /api/projects<br/>Header: Authorization Bearer {token}
+    API->>MW: Auth Middleware
+    MW->>MW: Validate Project Data (JOI)
+    MW->>CTR: projectController.createProject()
+    CTR->>DB: Verify Client Exists
+    DB-->>CTR: Client Found
+    CTR->>DB: Create Project
+    DB-->>CTR: Project Created
+    CTR->>ACT: Log Activity (New Project)
+    ACT->>DB: Save Activity
+    CTR-->>DASH: 201 {project}
+
+    Note over CF,DASH: PROTECTED ROUTE - Update Project Status
+    DASH->>API: PUT /api/projects/:id<br/>Header: Authorization Bearer {token}
+    API->>MW: Auth Middleware
+    MW->>CTR: projectController.updateProject()
+    CTR->>DB: Find & Update Project
+    DB-->>CTR: Project Updated
+    CTR->>CTR: Check Status Change
+    CTR->>ACT: Log Activity (Status Change)
+    CTR->>CTR: Check Payment Status
+    alt Payment Completed
+        CTR->>ACT: Log Activity (Payment Received)
+    end
+    CTR-->>DASH: 200 {project}

@@ -1,0 +1,54 @@
+graph TD
+    A[App.jsx<br/>Main Router] --> B[AuthContext Provider<br/>JWT Token Management]
+    B --> C{Route Protection}
+    
+    C -->|Public| D[Login Page<br/>components/Auth/Login.jsx]
+    C -->|Protected| E[Layout Component<br/>components/Layout/Layout.jsx]
+    
+    E --> F[Sidebar<br/>Navigation Menu]
+    E --> G[Topbar<br/>Profile & Actions]
+    E --> H[Main Content Area]
+    
+    H --> I[Dashboard Route<br/>/dashboard]
+    H --> J[Clients Route<br/>/clients]
+    H --> K[Projects Route<br/>/projects]
+    H --> L[Revenue Route<br/>/revenue]
+    H --> M[Settings Route<br/>/settings]
+    
+    I --> N[DashboardOverview.jsx]
+    N --> O[StatCard Component]
+    N --> P[ActivityTimeline Component]
+    N --> Q[RecentClients Component]
+    
+    J --> R[ClientsList.jsx]
+    J --> S[ClientDetails.jsx]
+    J --> T[ClientForm.jsx]
+    R --> U[DataTable Component]
+    S --> V[Notes Component]
+    
+    K --> W[ProjectsList.jsx]
+    K --> X[ProjectForm.jsx]
+    K --> Y[ProjectDetails.jsx]
+    W --> U
+    
+    L --> Z[RevenueOverview.jsx]
+    L --> AA[RevenueChart.jsx]
+    Z --> AB[Stock-style Line Chart]
+    
+    M --> AC[SettingsPage.jsx]
+    AC --> AD[PasswordChange Form]
+    
+    AE[API Service<br/>services/api.js] --> B
+    AE --> N
+    AE --> R
+    AE --> W
+    AE --> Z
+    
+    AF[Helper Functions<br/>utils/helpers.js] --> N
+    AF --> R
+    AF --> W
+    
+    style A fill:#8b5cf6,stroke:#7c3aed,color:#fff
+    style B fill:#3b82f6,stroke:#2563eb,color:#fff
+    style E fill:#06b6d4,stroke:#0891b2,color:#fff
+    style AE fill:#10b981,stroke:#059669,color:#fff
