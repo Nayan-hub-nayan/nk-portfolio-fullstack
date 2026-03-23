@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: "EagleHorizon";
+  src: url("./assets/fonts/EagleHorizonP.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Gradzy";
+  src: url("./assets/fonts/Gradzy-3lx13.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Kugile";
+  src: url("./assets/fonts/Kugile_Demo.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Runiga";
+  src: url("./assets/fonts/Runiga.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Sacrifice";
+  src: url("./assets/fonts/SacrificeDemo-8Ox1B.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "valty";
+  src: url("./assets/fonts/Valty.otf") format("opentype");
+}
+
+@keyframes scroll {
+  to {
+    transform: translateY(-144px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 6s linear infinite;
+}
+
+
+
+::-webkit-scrollbar {
+  width: 8px;
+  /* Adjust the width */
+}
+
+/* Customize the track */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Customize the thumb (scroll handle) */
+::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+/* Change thumb color on hover */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+/* Scroll Transition Optimizations */
+.scroll-transition-container {
+  -webkit-overflow-scrolling: touch;
+  will-change: scroll-position;
+}
+
+.scroll-section-1,
+.scroll-section-2 {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform, opacity;
+}

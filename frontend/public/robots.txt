@@ -1,0 +1,177 @@
+{
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-emerald-600 via-emerald-700 to-emerald-800 relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-20 left-10 w-32 h-32 opacity-20">
+          <div className="w-full h-full bg-emerald-400 rounded-full blur-3xl"></div>
+        </div>
+        <div className="absolute bottom-20 right-20 w-40 h-40 opacity-20">
+          <div className="w-full h-full bg-emerald-300 rounded-full blur-3xl"></div>
+        </div>
+        <div className="absolute bottom-40 left-1/4 w-24 h-24 opacity-10">
+          <div className="w-full h-full bg-emerald-500 rounded-full blur-2xl"></div>
+        </div>
+
+        {/* Rocket Icon - Bottom Left */}
+        <div className="absolute bottom-10 left-10 opacity-60">
+          <svg viewBox="0 0 64 64" fill="none" className="w-20 h-20">
+            <path d="M32 8L28 28L32 32L36 28L32 8Z" fill="#34D399" opacity="0.6"/>
+            <circle cx="32" cy="32" r="4" fill="#10B981"/>
+            <path d="M20 40L16 56L24 48L20 40Z" fill="#34D399" opacity="0.6"/>
+            <path d="M44 40L48 56L40 48L44 40Z" fill="#34D399" opacity="0.6"/>
+          </svg>
+        </div>
+
+        {/* 3D Objects - Bottom Right */}
+        <div className="absolute bottom-20 right-32 opacity-40">
+          <div className="relative">
+            <div className="w-24 h-24 bg-emerald-400 rounded-3xl transform rotate-12"></div>
+            <div className="absolute inset-0 w-24 h-24 bg-emerald-300 rounded-3xl transform -rotate-12 translate-x-4 translate-y-4"></div>
+          </div>
+        </div>
+
+        {/* Header */}
+        <header className="relative z-50">
+          <div className="max-w-[1280px] mx-auto px-10 py-6">
+            <div className="flex items-center justify-between">
+              {/* Logo */}
+              <button 
+                onClick={() => setShowContactPage(false)}
+                className="flex items-center gap-2 hover:opacity-80 transition"
+              >
+                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center">
+                  <svg viewBox="0 0 24 24" fill="none" className="w-8 h-8">
+                    <path d="M7 17L17 7M17 7H7M17 7V17" stroke="#059669" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+                <div className="text-white">
+                  <div className="text-lg font-bold leading-tight">Reap</div>
+                  <div className="text-lg font-bold leading-tight">Capital</div>
+                </div>
+              </button>
+
+              {/* Navigation */}
+              <div className="hidden md:flex items-center gap-6">
+                <button 
+                  onClick={() => setShowContactPage(false)}
+                  className="text-white hover:text-emerald-200 transition"
+                >
+                  About
+                </button>
+                <button 
+                  onClick={() => setShowContactPage(false)}
+                  className="text-white hover:text-emerald-200 transition"
+                >
+                  Team
+                </button>
+                <button className="bg-white text-emerald-700 px-6 py-2 rounded-full font-semibold hover:bg-emerald-50 transition">
+                  Contact
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content */}
+        <div className="max-w-[1280px] mx-auto px-10 py-16">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Text */}
+            <div className="text-white">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight">
+                Empowering the MSMEs with instant access and instant solutions.
+              </h1>
+              
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-emerald-400 rounded-full flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="text-white" size={16} />
+                  </div>
+                  <p className="text-emerald-100 text-lg">From Approval to Account- Instantly</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-6 h-6 bg-emerald-400 rounded-full flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="text-white" size={16} />
+                  </div>
+                  <p className="text-emerald-100 text-lg">Fast Track Your Funding</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Side - Form */}
+            <div className="bg-white rounded-3xl p-8 shadow-2xl">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Check If You're Eligible
+              </h2>
+              
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name as per PAN Card"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-gray-100 rounded-xl border-none focus:ring-2 focus:ring-emerald-500 outline-none text-gray-900"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <input
+                    type="tel"
+                    name="mobile"
+                    placeholder="Mobile number"
+                    value={formData.mobile}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-gray-100 rounded-xl border-none focus:ring-2 focus:ring-emerald-500 outline-none text-gray-900"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <select
+                    name="businessAge"
+                    value={formData.businessAge}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-gray-100 rounded-xl border-none focus:ring-2 focus:ring-emerald-500 outline-none text-gray-900"
+                    required
+                  >
+                    <option value="">How old is your business?</option>
+                    <option value="0-1">Less than 1 year</option>
+                    <option value="1-2">1-2 years</option>
+                    <option value="2-5">2-5 years</option>
+                    <option value="5+">5+ years</option>
+                  </select>
+                </div>
+
+                <div>
+                  <select
+                    name="revenue"
+                    value={formData.revenue}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-gray-100 rounded-xl border-none focus:ring-2 focus:ring-emerald-500 outline-none text-gray-900"
+                    required
+                  >
+                    <option value="">What's your annual business revenue?</option>
+                    <option value="0-5L">Less than ₹5 Lakhs</option>
+                    <option value="5L-10L">₹5-10 Lakhs</option>
+                    <option value="10L-25L">₹10-25 Lakhs</option>
+                    <option value="25L-50L">₹25-50 Lakhs</option>
+                    <option value="50L-1Cr">₹50 Lakhs - ₹1 Crore</option>
+                    <option value="1Cr+">₹1 Crore+</option>
+                  </select>
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-gray-900 text-white py-4 rounded-xl font-semibold hover:bg-gray-800 transition"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
